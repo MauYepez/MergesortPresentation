@@ -44,7 +44,7 @@
       <!-- ABOUT SECTION-->
       <section class="about" id="about">
           <div class="img">
-            <iframe src="https://onedrive.live.com/embed?resid=847F28765622EBD9%21205743&authkey=!AAsSOQKhunG6Li8&em=2" width="720" height="480" frameborder="0" scrolling="no"></iframe>
+            <iframe src="https://onedrive.live.com/embed?resid=847F28765622EBD9%21205792&authkey=!AOSr0dc6CFMJOdQ&em=2" width="720" height="480" frameborder="0" scrolling="no"></iframe>
           </div>
       </section>
 
@@ -113,7 +113,7 @@ using namespace std;</p>
 <span class="comment">// Function to merge the sub-arrays.</span>                  
 <p>void merge(int* arr, int left, int mid, int right) 
 {
-    int i, j, k;
+    int l, r, m;
     int const lengthLeft = mid - left + 1;
     int const lengthRight = right - mid;
   
@@ -132,62 +132,62 @@ using namespace std;</p>
     }
   
     <span class="comment">// Merging the temp arrays back into the actual array.</span>  
-    i = 0; <span class="comment">// Starting index of arrLeft[].</span>
-    j = 0; <span class="comment">// Staring index of arrRight[].</span>
-    k = left; <span class="comment">// Starting index of merged subarray.</span>
+    l = 0; <span class="comment">// Starting index of arrLeft[].</span>
+    r = 0; <span class="comment">// Staring index of arrRight[].</span>
+    m = left; <span class="comment">// Starting index of merged subarray.</span>
   
-    while (i < lengthLeft && j < lengthRight) 
+    while (l < lengthLeft && r < lengthRight) 
     {
         <span class="comment">// Checking and placing the smaller number of both temp arrays into the main array.</span>
-        if (arrLeft[i] <= arrRight[j]) 
+        if (arrLeft[l] <= arrRight[r]) 
         {
-            arr[k] = arrLeft[i];
-            i++;
+            arr[m] = arrLeft[l];
+            l++;
         }
         else 
         {
-            arr[k] = arrRight[j];
-            j++;
+            arr[m] = arrRight[r];
+            r++;
         }
-        k++;
+        m++;
     }
   
     <span class="comment">// After the successful execution of the above loop</span> 
     <span class="comment">// copying the remaining elements of the left subarray (if remaining).</span> 
-    while (i < lengthLeft) 
+    while (l < lengthLeft) 
     {
-        arr[k] = arrLeft[i];
-        k++;
-        i++;
+        arr[m] = arrLeft[l];
+        m++;
+        l++;
     }
 
     <span class="comment">// Copying the remaining elements of the right sub array (if remaining).</span> 
-    while (j < lengthRight) 
+    while (r < lengthRight) 
     {
-        arr[k] = arrRight[j];
-        k++;
-        j++;
+        arr[m] = arrRight[r];
+        m++;
+        r++;
     }
 }
 
 </p>                  
                   
 <span class="comment">// The mergeSort() function.</span>                   
-<p>void mergeSort(int* arr, int low, int high) 
+<p>void mergeSort(int* arr, int left, int right) 
 {
     int mid;
 
-    if (low < high) 
+    if (left < right) 
     {
         <span class="comment">// Calculating the mid.</span>
-        mid = (low + high) / 2;
+        mid = (left + right) / 2;
 
         <span class="comment">// Calling the function mergeSort() recursively and breaking down the given array into smaller sub arrays.</span>
-        mergeSort(arr, low, mid);
-        mergeSort(arr, mid + 1, high);
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
 
         <span class="comment">// Calling the merge() function to merge the sorted subarrays into the main array.</span>
-        merge(arr, low, mid, high);
+        merge(arr, left, mid, right);
     }
 }
 </p>                  

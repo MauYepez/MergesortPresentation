@@ -28,7 +28,7 @@
     while (p1 < c && p2 < r) { // O(k) fill temp storage
       yield ({
         act: Act.none,
-        msg: `Comparing A[i] > A[j]: is ${A[p1]} > ${A[p2]} ?`
+        msg: `Comparing A[l] > A[r]: is ${A[p1]} > ${A[p2]} ?`
       });
       if (A[p1] <= A[p2]) {
         yield ({
@@ -36,7 +36,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output A[i] == ${A[p1]} from left`
+          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output A[l] == ${A[p1]} from left`
         });
         p1 += 1; // O(1) increment left pointer
         yield ({
@@ -44,7 +44,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: "Increment i"
+          msg: "Increment l"
         });
       } else {
         yield ({
@@ -52,7 +52,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `Yes: ${A[p1]} > ${A[p2]} thus output A[j] == ${A[p2]} from right`
+          msg: `Yes: ${A[p1]} > ${A[p2]} thus output A[r] == ${A[p2]} from right`
         });
         p2 += 1; // O(1) increment right pointer
         yield ({
@@ -60,7 +60,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: "Increment j"
+          msg: "Increment r"
         });
       }
       t += 1; // O(1) increment temp pointer
@@ -69,7 +69,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment k"
+        msg: "Increment m"
       });
     }
     // copy remaining left side
@@ -79,7 +79,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: `Output remaining A[i] == ${A[p1]}`
+        msg: `Output remaining A[l] == ${A[p1]}`
       });
       p1 += 1; // O(1) increment left pointer
       yield ({
@@ -87,7 +87,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment i"
+        msg: "Increment l"
       });
       t += 1; // O(1) increment temp pointer
       yield ({
@@ -95,7 +95,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment k"
+        msg: "Increment m"
       });
     }
     // copy remaining right side
@@ -105,7 +105,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: `Output remaining A[j] == ${A[p2]}`
+        msg: `Output remaining A[r] == ${A[p2]}`
       });
       p2 += 1; // O(1) increment right pointer
       yield ({
@@ -113,7 +113,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment j"
+        msg: "Increment r"
       });
       t += 1; // O(1) increment temp pointer
       yield ({
@@ -121,7 +121,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment k"
+        msg: "Increment m"
       });
     }
     return (yield {
@@ -244,21 +244,21 @@
     lrect = left.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, top_y);
-    ltext = left.text("i").font({
+    ltext = left.text("l").font({
       family: "Monospace",
       size: 32
     }).center(lrect.cx(), lrect.cy() - bbox.height);
     rrect = right.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(bbox.width * c, top_y);
-    rtext = right.text("j").font({
+    rtext = right.text("r").font({
       family: "Monospace",
       size: 32
     }).center(rrect.cx(), rrect.cy() - bbox.height);
     orect = out.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, bot_y);
-    otext = out.text("k").font({
+    otext = out.text("m").font({
       family: "Monospace",
       size: 32
     });
